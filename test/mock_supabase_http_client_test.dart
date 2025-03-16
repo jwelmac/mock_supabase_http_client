@@ -77,7 +77,6 @@ void main() {
           );
       final usersAfterUpdate =
           await mockSupabase.from(table).select().eq('user_id', 1);
-      print(usersAfterUpdate.length);
       expect(usersAfterUpdate.length, 1);
       expect(usersAfterUpdate.first, updatedData);
     });

@@ -541,7 +541,7 @@ class MockSupabaseHttpClient extends BaseClient {
           }).toList();
         } else if (key.contains('!inner')) {
           // referenced table filtering with !inner
-        } else {
+        } else if (returningRows.isNotEmpty) {
           // Regular filtering on the top level table
           final filter = FilterParser.parseFilter(
             columnName: key,

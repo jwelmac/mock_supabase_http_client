@@ -255,6 +255,16 @@ void main() {
       expect(titlesOnly[1], {'id': 1, 'title': 'First post'});
     });
 
+    test('Select after deleting all items', () async {
+      // Insert an item
+      await mockSupabase
+          .from('posts')
+          .insert({'id': 1, 'title': 'To be deleted'});
+      await mockSupabase.from('posts').delete().eq('id', 1);
+      final posts = await mockSupabase.from('posts').select().eq('id', 1);
+      expect(posts.length, 0);
+    });
+
     test('No mixing with default schema', () async {
       // Insert into custom schema
       await mockSupabase
